@@ -75,12 +75,12 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-        // check key input for restart
-        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+        // check key input for restart / menu
+        if(this.gameOver && Phaser.Input.Keyboard.JustDown(KeyR)) {
             this.scene.restart();
         }
 
-        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(KeyLEFT)) {
             this.scene.start("menuScene");
         }
 
