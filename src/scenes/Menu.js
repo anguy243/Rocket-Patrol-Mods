@@ -8,6 +8,8 @@ class Menu extends Phaser.Scene {
         this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.audio('sfx_cawbird', './assets/cawbird.wav');
         this.load.audio('sfx_netfire', './assets/firenet.wav');
+        // Kevin MacLeod - Pixelland (copyright-free)
+        this.load.audio('bground_music', './assets/pixelland.mp3');
     }
 
     create() {
@@ -47,13 +49,13 @@ class Menu extends Phaser.Scene {
             gameTimer: 60000    
           }
           this.sound.play('sfx_select');
-          this.scene.start('playScene');    
+          this.scene.start('playScene');  
         }
         if (Phaser.Input.Keyboard.JustDown(KeyRIGHT)) {
           // hard mode
           game.settings = {
             birdSpeed: 4,
-            gameTimer: 45000    
+            gameTimer: 1000   
           }
           this.sound.play('sfx_select');
           this.scene.start('playScene');    

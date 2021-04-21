@@ -16,6 +16,10 @@ class Play extends Phaser.Scene {
 
     create() {
 
+        // start music
+        var musica = this.sound.add('bground_music');
+        musica.play();
+        
         // place tile sprite
         this.clouds = this.add.tileSprite(0, 0, 640, 480, 'clouds').setOrigin(0, 0);
 
@@ -76,7 +80,26 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER. You made $' + this.p1Score, scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
+            // stop music
+            musica.stop();
         }, null, this);
+
+        // display clock
+        let clockConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#EEEEEE',
+            color: '#000000',
+            align: 'right',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 100
+        }
+
+        this.clockLeft = this.add.text((borderUISize + borderPadding) * 11, borderUISize + borderPadding*2, game.settings.gameTimer, clockConfig);
+
     }
 
     update() {
