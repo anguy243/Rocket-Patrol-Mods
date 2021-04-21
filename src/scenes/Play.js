@@ -57,7 +57,7 @@ class Play extends Phaser.Scene {
         this.p1Score = 0;
         // display score
         let scoreConfig = {
-            fontFamily: 'Courier',
+            fontFamily: 'Impact',
             fontSize: '28px',
             backgroundColor: '#EEEEEE',
             color: '#000000',
@@ -78,7 +78,7 @@ class Play extends Phaser.Scene {
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER. You made $' + this.p1Score, scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Greedy? Press (R) to Restart. Or press ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
             // stop music
             musica.stop();
@@ -160,8 +160,24 @@ class Play extends Phaser.Scene {
         });
         // score add and repaint
         this.p1Score += bird.points;
-        this.scoreLeft.text = "$ " + this.p1Score;       
+        this.scoreLeft.text = "$ " + this.p1Score;    
+        // game.settings.gameTimer += 5000;   
 
-        this.sound.play('sfx_cawbird');
+        var value = Phaser.Math.Between(0, 3);
+        console.log('random' + value);
+
+        if (value == 0){
+            this.sound.play('sfx_chaching');
+        }
+        if (value == 1){
+            this.sound.play('sfx_cawalex');
+        }
+        if (value == 2){
+            this.sound.play('sfx_twitter');
+        }
+        if (value == 3){
+            this.sound.play('sfx_cawbird');
+        }
+        // this.sound.play('sfx_cawbird');
     }
 }

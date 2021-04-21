@@ -27,11 +27,6 @@ class Net extends Phaser.GameObjects.Sprite {
         // if fired, move up
         if(this.isFiring && this.y >= borderUISize * 3 + borderPadding) {
             this.y -= this.moveSpeed;
-            if(KeyLEFT.isDown && this.x >= borderUISize + this.width) {
-                this.x -= this.moveSpeed;
-            } else if (KeyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
-                this.x += this.moveSpeed;
-            }
         }
         // reset on miss
         if(this.y <= borderUISize * 3 + borderPadding) {

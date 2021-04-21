@@ -5,9 +5,13 @@ class Bird extends Phaser.GameObjects.Sprite {
       scene.add.existing(this);     // add to existing value
       this.points = pointValue;     // store pointValue
       this.moveSpeed = game.settings.birdSpeed;
+
+      var random = Phaser.Math.Between(0,1);
+      console.log(random);
     }
 
     update() {
+
         // move bird left
         this.x -= this.moveSpeed;
         // wrap around from left edge to right edge
