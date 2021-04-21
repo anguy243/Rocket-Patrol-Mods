@@ -83,25 +83,6 @@ class Play extends Phaser.Scene {
             // stop music
             musica.stop();
         }, null, this);
-
-        // display clock
-        let clockConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#EEEEEE',
-            color: '#000000',
-            align: 'right',
-            padding: {
-            top: 5,
-            bottom: 5,
-            },
-            fixedWidth: 100
-        }
-
-        this.clockLeft = this.add.text((borderUISize + borderPadding) * 11, borderUISize + borderPadding*2, game.settings.gameTimer, clockConfig);
-        this.timer();
-        // setInterval(clockConfig, 1000);
-
     }
 
     update() {
