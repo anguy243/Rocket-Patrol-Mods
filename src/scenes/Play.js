@@ -77,8 +77,8 @@ class Play extends Phaser.Scene {
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER. You made $' + this.p1Score, scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Greedy? Press (R) to Restart. Or press ← for Menu', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER. You made $' + this.p1Score + '.', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Greedy? Press (R) to Restart. Or press ← for Menu.', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
             // stop music
             musica.stop();
@@ -99,6 +99,8 @@ class Play extends Phaser.Scene {
         }
 
         this.clockLeft = this.add.text((borderUISize + borderPadding) * 11, borderUISize + borderPadding*2, game.settings.gameTimer, clockConfig);
+        this.timer();
+        // setInterval(clockConfig, 1000);
 
     }
 
@@ -147,6 +149,14 @@ class Play extends Phaser.Scene {
         }
     }
 
+    timer() {
+        setInterval(function() {
+            console.log('gang');
+            game.settings.gameTimer -= 1000;
+            this.clockLeft;
+        }, 1000)
+    }
+
     birdExplode(bird) {
         // temporarily hide bird
         bird.alpha = 0;                         
@@ -160,12 +170,13 @@ class Play extends Phaser.Scene {
         });
         // score add and repaint
         this.p1Score += bird.points;
-        this.scoreLeft.text = "$ " + this.p1Score;    
-        // game.settings.gameTimer += 5000;   
+        this.scoreLeft.text = "$ " + this.p1Score;     
 
+        // generate random number from 0-3
         var value = Phaser.Math.Between(0, 3);
         console.log('random' + value);
 
+        // each number has a unique sound effect that will play when a bird is hit
         if (value == 0){
             this.sound.play('sfx_chaching');
         }
@@ -178,6 +189,5 @@ class Play extends Phaser.Scene {
         if (value == 3){
             this.sound.play('sfx_cawbird');
         }
-        // this.sound.play('sfx_cawbird');
     }
 }
