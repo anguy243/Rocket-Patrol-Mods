@@ -1,14 +1,14 @@
-// Spaceship prefab
-class Spaceship extends Phaser.GameObjects.Sprite {
+// Bird prefab
+class Bird extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame, pointValue) {
       super(scene, x, y, texture, frame);
       scene.add.existing(this);     // add to existing value
       this.points = pointValue;     // store pointValue
-      this.moveSpeed = game.settings.spaceshipSpeed;
+      this.moveSpeed = game.settings.birdSpeed;
     }
 
     update() {
-        // move spaceship left
+        // move bird left
         this.x -= this.moveSpeed;
         // wrap around from left edge to right edge
         if(this.x <= 0 - this.width) {

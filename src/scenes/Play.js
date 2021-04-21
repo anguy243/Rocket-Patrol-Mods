@@ -6,7 +6,7 @@ class Play extends Phaser.Scene {
     preload() {
         // load images/tile sprites
         this.load.image('rocket', './assets/rocket.png');
-        this.load.image('spaceship', './assets/spaceship.png');
+        this.load.image('bird', './assets/bird.png');
         this.load.image('clouds', './assets/clouds.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
@@ -27,10 +27,10 @@ class Play extends Phaser.Scene {
         // add rocket (p1) (I changed 0 to 1 because the rocket wasn't popping up on my screen at the beginning of the game)
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize, 'rocket').setOrigin(0.5, 1);
 
-        // add spaceships (x3)
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
-        this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
+        // add birds (x3)
+        this.bird01 = new Bird(this, game.config.width + borderUISize*6, borderUISize*4, 'bird', 0, 30).setOrigin(0, 0);
+        this.bird02 = new Bird(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'bird', 0, 20).setOrigin(0,0);
+        this.bird03 = new Bird(this, game.config.width, borderUISize*6 + borderPadding*4, 'bird', 0, 10).setOrigin(0,0);
         
         // define keys
         KeyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -87,53 +87,53 @@ class Play extends Phaser.Scene {
         this.clouds.tilePositionX -= 4;
         if (!this.gameOver) {               
             this.p1Rocket.update();         // update rocket sprite
-            this.ship01.update();           // update spaceships (x3)
-            this.ship02.update();
-            this.ship03.update();
+            this.bird01.update();           // update birds (x3)
+            this.bird02.update();
+            this.bird03.update();
         } 
 
         // check collisions
-        if(this.checkCollision(this.p1Rocket, this.ship03)) {
+        if(this.checkCollision(this.p1Rocket, this.bird03)) {
             this.p1Rocket.reset();
-            this.shipExplode(this.ship03);   
+            this.birdExplode(this.bird03);   
         }
-        if (this.checkCollision(this.p1Rocket, this.ship02)) {
+        if (this.checkCollision(this.p1Rocket, this.bird02)) {
             this.p1Rocket.reset();
-            this.shipExplode(this.ship02);
+            this.birdExplode(this.bird02);
         }
-        if (this.checkCollision(this.p1Rocket, this.ship01)) {
+        if (this.checkCollision(this.p1Rocket, this.bird01)) {
             this.p1Rocket.reset();
-            this.shipExplode(this.ship01);
+            this.birdExplode(this.bird01);
         }
     }
 
-    checkCollision(rocket, ship) {
+    checkCollision(rocket, bird) {
         // simple AABB checking
-        if (rocket.x < ship.x + ship.width && 
-            rocket.x + rocket.width > ship.x && 
-            rocket.y < ship.y + ship.height &&
-            rocket.height + rocket.y > ship. y) {
+        if (rocket.x < bird.x + bird.width && 
+            rocket.x + rocket.width > bird.x && 
+            rocket.y < bird.y + bird.height &&
+            rocket.height + rocket.y > bird. y) {
                 return true;
         } else {
             return false;
         }
     }
 
-    shipExplode(ship) {
-        // temporarily hide ship
-        ship.alpha = 0;                         
-        // create explosion sprite at ship's position
-        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
+    birdExplode(bird) {
+        // temporarily hide bird
+        bird.alpha = 0;                         
+        // create explosion sprite at bird's position
+        let boom = this.add.sprite(bird.x, bird.y, 'explosion').setOrigin(0, 0);
         boom.anims.play('explode');             // play explode animation
         boom.on('animationcomplete', () => {    // callback after ani completes
-          ship.reset();                       // reset ship position
-          ship.alpha = 1;                     // make ship visible again
+          bird.reset();                       // reset bird position
+          bird.alpha = 1;                     // make bird visible again
           boom.destroy();                     // remove explosion sprite
         });
         // score add and repaint
-        this.p1Score += ship.points;
+        this.p1Score += bird.points;
         this.scoreLeft.text = this.p1Score;       
 
-        this.sound.play('sfx_explosion');
+        this.sound.play('sfx_cawbird');
     }
 }
