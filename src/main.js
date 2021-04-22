@@ -1,7 +1,7 @@
 // Student:               Alexander Nguyen
 // Project Title:         Rocket Patrol Mods - "Flippin the Bird"
 // Date:                  April 21st, 2021
-// Length of Completion:  
+// Length of Completion:  ~ 12+ hours
 
 // Points Breakdown:
 //      60 Redesign the game's artwork, UI, and sound to change its theme/aesthetic (to something other than sci-fi)
